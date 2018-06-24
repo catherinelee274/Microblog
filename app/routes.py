@@ -1,19 +1,25 @@
+from flask import render_template
 from app import app
 
-#decorators
+
+
 @app.route('/')
 @app.route('/index')
 def index():
     user = {'username': 'Catherine'}
-    return '''
+    posts = [
+        {'author': {'username':'Cat'},
+        'body': 'hello world'
+         },
+        {
+            'author':{'username':'quinoa'},
+            'body':'s;dflkajsd'
+            }
+        ]
+    #rendere_template('file', extravariablesyouwanttoinherit)
+    return render_template('index.html', title='Home', user=user, posts=posts) #user=user lets user var here be inherited
 
-<html>
-    <head>
-        <title>Home Page - Microblog </title>
-    </head>
 
-    <body>
-        <h1>Hello,''' + user['username'] + '''!</h1>
-    </body> 
-</html>
-'''
+@app.route("/members")
+def members(): 
+    return "Members"
